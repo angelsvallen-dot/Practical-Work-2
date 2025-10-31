@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PKS - Student Registration Form</title>
+
+  <!-- ======================== BOOTSTRAP SECTION ======================== -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ======================== DESIGN (CSS) SECTION ======================== -->
+  <style>
+    body {
+      scroll-behavior: smooth;
+      background-image: url("https://scontent.fkul15-1.fna.fbcdn.net/v/t1.6435-9/49807995_2019392421441221_9048355452437397504_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=YM4k29RU0DcQ7kNvwFRFfr0&_nc_oc=Adnq7VaryMJLN_yiRXQIZuk5iFSMMhwo8X9loS4Qzlfzbgb9ETxdzyHUt25mZaKkHNg&_nc_zt=23&_nc_ht=scontent.fkul15-1.fna&_nc_gid=BPQLiSDPUVQ5yRYu-TGxoQ&oh=00_AffMT5KCbSugQ1WgcxpKycYbvsgB_8Z_jWklw7caBDlBsg&oe=692C4859");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-box {
+      width: 150px;
+      height: 150px;
+      border: 2px dashed #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #aaa;
+      font-size: 14px;
+      margin: 0 auto 10px auto;
+      background-color: #fdfdfd;
+      text-align: center;
+    }
+
+    .image-box input {
+      display: none;
+    }
+
+    .image-box label {
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .form-title {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .form-subtitle {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ======================== MAIN CONTENT (HTML STRUCTURE) ======================== -->
+  <div class="container">
+    <div class="form-container">
+      <h2 class="form-title">POLITEKNIK KUCHING SARAWAK</h2>
+      <h5 class="form-subtitle">Student Registration Form</h5>
+
+      <form id="regForm">
+        <!-- === Image Upload Box === -->
+        <div class="mb-3 text-center">
+          <label class="form-label d-block">Student Image:</label>
+          <div class="image-box" id="imageBox">
+            <label for="studentImage" id="imageLabel">
+              Upload student photo<br>
+              <small>(less than 5 MB)</small>
+            </label>
+            <input type="file" id="studentImage" accept="image/*" onchange="previewImage(event)">
+          </div>
+        </div>
+
+        <!-- === Student Information === -->
+        <div class="mb-3">
+          <label>Student Name:</label>
+          <input type="text" class="form-control" id="studentName" placeholder="Full name" onchange="toUpperCaseText(this)">
+        </div>
+
+        <div class="mb-3">
+          <label>Father's Name:</label>
+          <input type="text" class="form-control" id="fatherName" placeholder="Father's full name" onchange="toUpperCaseText(this)">
+        </div>
+
+        <div class="mb-3">
+          <label>Mother's Name:</label>
+          <input type="text" class="form-control" id="motherName" placeholder="Mother's full name" onchange="toUpperCaseText(this)">
+        </div>
+
+        <div class="mb-3">
+          <label>Gender:</label><br>
+          <input type="radio" name="gender" value="Male"> Male
+          <input type="radio" name="gender" value="Female"> Female
+        </div>
+
+        <div class="mb-3">
+          <label>Date of Birth:</label>
+          <input type="date" class="form-control" id="dob" onblur="blurEvent(this)">
+        </div>
+
+        <div class="mb-3">
+          <label>Email:</label>
+          <input type="email" class="form-control" id="email" placeholder="email@example.com" onfocus="focusEvent(this)">
+        </div>
+
+        <div class="mb-3">
+          <label>Level:</label>
+          <select class="form-select">
+            <option value="">Select Level</option>
+            <option>ASASI</option>
+            <option>DIPLOMA</option>
+            <option>DEGREE</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Department:</label>
+          <select class="form-select">
+            <option value="">Select Department</option>
+            <option>CIVIL ENGINEERING DEPARTMENT (JKA)</option>
+            <option>DEPARTMENT OF ELECTRICAL ENGINEERING (DEE)</option>
+            <option>DEPARTMENT OF INFORMATION & COMMUNICATION TECHNOLOGY (JTMK)</option>
+            <option>DEPARTMENT OF MECHANICAL ENGINEERING (DME)</option>
+            <option>DEPARTMENT OF COMMERCE (DOC)</option>
+            <option>DEPARTMENT OF PETROCHEMICAL ENGINEERING (JKPK)</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Mobile Number:</label>
+          <input type="tel" class="form-control" placeholder="+60 xx-xxxxxxx">
+        </div>
+
+        <!-- === Address Section === -->
+        <h5 class="mt-4">Address</h5>
+
+        <div class="mb-3">
+          <label>State:</label>
+          <select class="form-select">
+            <option value="">Select State</option>
+            <option>Johor</option>
+            <option>Kedah</option>
+            <option>Kelantan</option>
+            <option>Melaka</option>
+            <option>Negeri Sembilan</option>
+            <option>Pahang</option>
+            <option>Penang</option>
+            <option>Perak</option>
+            <option>Perlis</option>
+            <option>Sabah</option>
+            <option>Sarawak</option>
+            <option>Selangor</option>
+            <option>Terengganu</option>
+            <option>Kuala Lumpur</option>
+            <option>Labuan</option>
+            <option>Putrajaya</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>City:</label>
+          <input type="text" class="form-control" placeholder="City">
+        </div>
+
+        <div class="mb-3">
+          <label>Postcode:</label>
+          <input type="text" class="form-control" placeholder="Postcode">
+        </div>
+
+        <!-- === Buttons === -->
+        <div class="text-center">
+          <button type="button" class="btn btn-primary" onclick="submitForm()">Register</button>
+          <button type="reset" class="btn btn-secondary ms-2">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================== MODAL (POP-UP MESSAGE) ======================== -->
+  <div class="modal fade" id="successModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content text-center p-4">
+        <h5>Your details have been saved!</h5>
+        <button type="button" class="btn btn-success mt-3" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== JAVASCRIPT FUNCTION SECTION ======================== -->
+  <script>
+    // Preview selected image
+    function previewImage(event) {
+      const imageBox = document.getElementById("imageBox");
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          imageBox.innerHTML = `<img src="${e.target.result}" width="100%" height="100%" style="object-fit:cover; border-radius:5px;">`;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // onBlur example
+    function blurEvent(element) {
+      element.style.borderColor = "gray";
+    }
+
+    // onFocus example
+    function focusEvent(element) {
+      element.style.borderColor = "blue";
+    }
+
+    // Convert input to uppercase
+    function toUpperCaseText(element) {
+      element.value = element.value.toUpperCase();
+    }
+
+    // Show modal on submit
+    function submitForm() {
+      new bootstrap.Modal(document.getElementById('successModal')).show();
+    }
+  </script>
+
+</body>
+</html>
